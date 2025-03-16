@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('background.jpg') no-repeat center center/cover;
+}
+
+.navbar {
+    background: #222;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.button-container .btn {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid white;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    width: 50%;
+    margin: 20px auto;
+    border-radius: 10px;
+}

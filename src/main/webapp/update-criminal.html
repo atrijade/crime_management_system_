@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Criminal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('background.jpg') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .navbar {
+            background: #222;
+            padding: 15px;
+            width: 100%;
+            color: white;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            width: 40%;
+            margin-top: 50px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .btn {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">Crime Management - Update Criminal</div>
+
+    <div class="form-container">
+        <h2>Update Criminal</h2>
+        <form action="UpdateCrimeServlet" method="post">
+            <form action="UpdateCriminalServlet" method="post">
+                <input type="text" name="criminalID" placeholder="Criminal ID" required>
+                <input type="text" name="name" placeholder="Name">
+                <input type="text" name="nationalID" placeholder="National ID">
+                <input type="text" name="address" placeholder="Address">
+                <input type="text" name="city" placeholder="City">
+                <input type="text" name="streetName" placeholder="Street Name">
+                <button type="submit" class="btn">Update Criminal</button>
+            </form>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

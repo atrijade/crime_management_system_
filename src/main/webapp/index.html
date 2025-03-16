@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crime Management System</title>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a class="logo" href="#">Crime Management</a>
+        <ul class="nav-links">
+            <li class="left"><a href="#">Home</a></li>
+            <li class="left"><a href="login.html">Cases</a></li>
+            <li class="left"><a href="police-login.html">Police</a></li>
+            <li class="left"><a href="judge-login.html">Judges</a></li>
+        </ul>
+       
+    </nav>
+
+    <div class="back">
+        <section class="stats-container glass">
+            <div class="stats-card">
+                <h3>Total Cases</h3>
+                <p id="totalCases">0</p>
+            </div>
+            <div class="stats-card">
+                <h3>Criminals Registered</h3>
+                <p id="totalCriminals">0</p>
+            </div>
+            <div class="stats-card">
+                <h3>Police Officers</h3>
+                <p id="totalOfficers">0</p>
+            </div>
+            <div class="stats-card">
+                <h3>Judges Available</h3>
+                <p id="totalJudges">0</p>
+            </div>
+        </section>
+
+        <section class="recent-activity glass">
+            <h2>Recent Activities</h2>
+            <ul>
+                <li>New Case Registered: Theft case in Bangalore</li>
+                <li>Case Verdict Updated: Case #25 - Guilty</li>
+                <li>Ongoing Investigation: Fraud case in Mumbai</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Crime Management System | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            function animateCount(id, target) {
+                let count = 0;
+                let speed = Math.ceil(target / 100);
+                let interval = setInterval(() => {
+                    count += speed;
+                    if (count >= target) {
+                        count = target;
+                        clearInterval(interval);
+                    }
+                    document.getElementById(id).textContent = count;
+                }, 20);
+            }
+
+            animateCount("totalCases", 50);
+            animateCount("totalCriminals", 30);
+            animateCount("totalOfficers", 10);
+            animateCount("totalJudges", 5);
+
+            // Handle Login and Logout
+            const loginBtn = document.getElementById("loginBtn");
+            const logoutBtn = document.getElementById("logoutBtn");
+
+            function checkLoginStatus() {
+                const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+                if (isLoggedIn) {
+                    loginBtn.style.display = "none";
+                    logoutBtn.style.display = "inline-block";
+                } else {
+                    loginBtn.style.display = "inline-block";
+                    logoutBtn.style.display = "none";
+                }
+            }
+
+            loginBtn.addEventListener("click", function () {
+                localStorage.setItem("isLoggedIn", "true");
+                checkLoginStatus();
+                window.location.href = "login.html"; // Redirect to login page
+            });
+
+            logoutBtn.addEventListener("click", function () {
+                localStorage.setItem("isLoggedIn", "false");
+                checkLoginStatus();
+            });
+
+            checkLoginStatus();
+        });
+    </script>
+
+    <style>
+        
+
+        .navbar {
+            background: #222;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 0 10px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+            background: #007bff;
+            color: white;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+
+        .btn.secondary {
+            background: #6c757d;
+        }
+
+        
+
+        .glass {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            width: 80%;
+        }
+
+        .stats-card {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            backdrop-filter: blur(15px);
+            width: 200px;
+        }
+
+        .recent-activity {
+            width: 80%;
+            margin-top: 20px;
+        }
+
+        .recent-activity ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recent-activity li {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('./images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure full height */
+}
+
+.back {
+    flex: 1; /* Expands to push footer down */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto; /* Pushes footer to bottom */
+    width: 100%;
+}
+
+    </style>
+
+</body>
+
+</html>

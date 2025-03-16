@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judge Panel - Crime Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('./images/background.jpg');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px auto;
+            border: none;
+            border-radius: 5px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Judge Panel</h2>
+        <form action="JudgeServlet" method="post">
+            <input type="hidden" name="action" value="addOrUpdateCase">
+
+            <label for="judgeID">Judge ID:</label>
+            <input type="text" id="judgeID" name="judgeID" required>
+
+            <label for="name">Judge Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="court">Court:</label>
+            <input type="text" id="court" name="court" required>
+
+            <label for="caseID">Case ID:</label>
+            <input type="text" id="caseID" name="caseID" required>
+
+            <label for="status">Case Status:</label>
+            <select id="status" name="status">
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Closed">Closed</option>
+            </select>
+
+            <label for="verdict">Verdict:</label>
+            <input type="text" id="verdict" name="verdict" placeholder="Enter verdict (if applicable)">
+
+            <button type="submit" class="btn">Submit</button>
+        </form>
+
+        <button class="btn" onclick="location.href='LoginServlet?action=logout'">Logout</button>
+    </div>
+</body>
+
+</html>
