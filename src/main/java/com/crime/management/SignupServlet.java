@@ -29,7 +29,7 @@ public class SignupServlet extends HttpServlet {
             stmt.setString(3, password);
 
             stmt.executeUpdate();
-            response.sendRedirect("index.html");
+            response.sendRedirect("login.html");
         } catch (Exception e) {
             e.printStackTrace();
             response.getWriter().println("Error: " + e.getMessage());

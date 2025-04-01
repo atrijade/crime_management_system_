@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Crime Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <script>
+        // Function to check if the admin session exists
+        function checkSession() {
+            fetch("CheckSessionServlet")
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.loggedIn) {
+                        sessionStorage.removeItem("admin");
+                        window.location.href = "AdminLogin.html";
+                    }
+                })
+                .catch(error => console.error("Error checking session:", error));
+        }
+
+        checkSession(); // Check session on page load
+
+        function logout() {
+            fetch("AdminLogoutServlet")
+                .then(() => {
+                    sessionStorage.removeItem("admin");
+                    window.location.href = "AdminLogin.html";
+                })
+                .catch(error => console.error("Logout error:", error));
+        }
+    </script>
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 text-white p-4 flex justify-between">
+        <h1 class="text-lg font-bold">Admin Panel</h1>
+        <div>
+            <a href="index.html" class="px-4 hover:underline">Back to Home</a>
+            <button onclick="logout()" class="ml-4 bg-red-500 px-4 py-1 rounded hover:bg-red-600">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Admin Dashboard -->
+    <div class="container mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+        <h2 class="text-2xl font-bold text-center mb-6">Manage Police & Judges</h2>
+
+        <!-- Form for Adding/Updating Police or Judge -->
+        <form action="AdminServlet" method="post" class="space-y-4">
+            <input type="hidden" id="action" name="action" value="add"> <!-- Action Set Dynamically -->
+
+            <div>
+                <label class="block font-semibold">Select Role:</label>
+                <select id="role" name="role" class="w-full p-2 border border-gray-300 rounded"
+                    onchange="toggleFields()">
+                    <option value="police">Police</option>
+                    <option value="judge">Judge</option>
+                </select>
+            </div>
+
+            <!-- Common Fields -->
+            <div>
+                <label class="block font-semibold">Name:</label>
+                <input type="text" id="name" name="name" class="w-full p-2 border border-gray-300 rounded" required>
+            </div>
+            <div>
+                <label class="block font-semibold">Password:</label>
+                <input type="password" id="password" name="password" class="w-full p-2 border border-gray-300 rounded"
+                    required>
+            </div>
+
+            <!-- Police-Specific Fields -->
+            <div id="policeFields">
+                <div>
+                    <label class="block font-semibold">Officer ID:</label>
+                    <input type="text" id="officerID" name="officerID"
+                        class="w-full p-2 border border-gray-300 rounded">
+                </div>
+                <div>
+                    <label class="block font-semibold">Station:</label>
+                    <input type="text" id="station" name="station" class="w-full p-2 border border-gray-300 rounded">
+                </div>
+                <div>
+                    <label class="block font-semibold">Contact:</label>
+                    <input type="text" id="contact" name="contact" class="w-full p-2 border border-gray-300 rounded">
+                </div>
+            </div>
+
+            <!-- Judge-Specific Fields -->
+            <div id="judgeFields" class="hidden">
+                <div>
+                    <label class="block font-semibold">Judge ID:</label>
+                    <input type="text" id="judgeID" name="judgeID" class="w-full p-2 border border-gray-300 rounded">
+                </div>
+                <div>
+                    <label class="block font-semibold">Court:</label>
+                    <input type="text" id="court" name="court" class="w-full p-2 border border-gray-300 rounded">
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex space-x-4">
+                <button type="submit" onclick="setAction(event, 'add')"
+                    class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Add</button>
+                <button type="submit" onclick="setAction(event, 'update')"
+                    class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Update</button>
+                <button type="submit" onclick="setAction(event, 'delete')"
+                    class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function toggleFields() {
+            const role = document.getElementById("role").value;
+            document.getElementById("policeFields").classList.toggle("hidden", role === "judge");
+            document.getElementById("judgeFields").classList.toggle("hidden", role === "police");
+        }
+
+        function setAction(event, action) {
+            event.preventDefault(); // Prevent form submission
+            document.getElementById("action").value = action;
+            event.target.form.submit(); // Now submit the form
+        }
+    </script>
+
+</body>
+
+</html>
